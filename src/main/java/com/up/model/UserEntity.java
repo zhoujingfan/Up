@@ -41,7 +41,7 @@ public class UserEntity  implements java.io.Serializable {
      private Timestamp registerTime;
      private String signature;
      private Gender gender;
-     private String adress;
+     private String address;
      private String nickname;
      private String avatar;
      private Set<PictureEntity> pictureEntities = new HashSet<PictureEntity>(0);
@@ -77,9 +77,32 @@ public class UserEntity  implements java.io.Serializable {
         this.nickname = nickname;
         this.avatar = avatar;
     }
+    
+    public UserEntity(String username, String passwordHash, String email, String phone){
+    	this.username=username;
+    	this.passwordHash=passwordHash;
+    	this.email=email;
+    	this.phone=phone;
+    	this.isEmailValidate=true;
+    	this.isPhoneValidate=true;
+    	this.gender=Gender.MALE;
+    }
+    
+    public UserEntity(String username, String passwordHash, String email, String phone, String nickname, String signature, String address, String gender){
+    	this.username=username;
+    	this.passwordHash=passwordHash;
+    	this.email=email;
+    	this.phone=phone;
+    	this.isEmailValidate=true;
+    	this.isPhoneValidate=true;
+    	if(gender=="Male")this.gender=Gender.MALE;else this.gender=Gender.FEMALE;
+    	this.nickname=nickname;
+    	this.address=address;
+    	this.signature=signature;
+    }
 
     /** full constructor */
-    public UserEntity(Integer id, String email, Boolean isEmailValidate, Boolean isPhoneValidate, Timestamp lastLogin, String username, String passwordHash, String phone, Timestamp registerTime, String signature, Gender gender, String adress, String nickname, String avatar, Set<PictureEntity> pictureEntities, Set<VideoEntity> videoEntities, Set<CommentEntity> commentEntities, Set<FollowEntity> followEntitiesForFollowUserId, Set<WeiboEntity> weiboEntities, Set<RoleEntity> roleEntities, Set<ArticleEntity> articleEntities, Set<FollowEntity> followEntitiesForUserId, Set<AgreeEntity> agreeEntities) {
+    public UserEntity(Integer id, String email, Boolean isEmailValidate, Boolean isPhoneValidate, Timestamp lastLogin, String username, String passwordHash, String phone, Timestamp registerTime, String signature, Gender gender, String address, String nickname, String avatar, Set<PictureEntity> pictureEntities, Set<VideoEntity> videoEntities, Set<CommentEntity> commentEntities, Set<FollowEntity> followEntitiesForFollowUserId, Set<WeiboEntity> weiboEntities, Set<RoleEntity> roleEntities, Set<ArticleEntity> articleEntities, Set<FollowEntity> followEntitiesForUserId, Set<AgreeEntity> agreeEntities) {
         this.id = id;
         this.email = email;
         this.isEmailValidate = isEmailValidate;
@@ -91,7 +114,7 @@ public class UserEntity  implements java.io.Serializable {
         this.registerTime = registerTime;
         this.signature = signature;
         this.gender = gender;
-        this.adress = adress;
+        this.address = address;
         this.nickname = nickname;
         this.avatar = avatar;
         this.pictureEntities = pictureEntities;
@@ -119,7 +142,7 @@ public class UserEntity  implements java.io.Serializable {
         this.id = id;
     }
 
-    @Column(name="email", columnDefinition="VARCHAR(50) DEFAULT NULL")
+    @Column(name="email", unique=true, columnDefinition="VARCHAR(50) DEFAULT NULL")
 
     public String getEmail() {
         return this.email;
@@ -149,7 +172,7 @@ public class UserEntity  implements java.io.Serializable {
         this.isPhoneValidate = isPhoneValidate;
     }
 
-    @Column(name="last_login", length=19, columnDefinition="TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00'")
+    @Column(name="last_login", length=19, columnDefinition="TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP")
 
     public Timestamp getLastLogin() {
         return this.lastLogin;
@@ -159,7 +182,7 @@ public class UserEntity  implements java.io.Serializable {
         this.lastLogin = lastLogin;
     }
 
-    @Column(name="name", nullable=false, length=30)
+    @Column(name="username", nullable=false, length=30)
 
     public String getUsername() {
         return this.username;
@@ -179,7 +202,7 @@ public class UserEntity  implements java.io.Serializable {
         this.passwordHash = passwordHash;
     }
 
-    @Column(name="phone", columnDefinition="VARCHAR(50) DEFAULT NULL")
+    @Column(name="phone", unique=true, columnDefinition="VARCHAR(50) DEFAULT NULL")
 
     public String getPhone() {
         return this.phone;
@@ -219,14 +242,14 @@ public class UserEntity  implements java.io.Serializable {
         this.gender = gender;
     }
 
-    @Column(name="adress", columnDefinition="VARCHAR(100) DEFAULT NULL")
+    @Column(name="address", columnDefinition="VARCHAR(100) DEFAULT NULL")
 
-    public String getAdress() {
-        return this.adress;
+    public String getAddress() {
+        return this.address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     @Column(name="nickname", nullable=false, length=30)
@@ -239,7 +262,7 @@ public class UserEntity  implements java.io.Serializable {
         this.nickname = nickname;
     }
 
-    @Column(name="avatar", nullable=false)
+    @Column(name="avatar", nullable=true)
 
     public String getAvatar() {
         return this.avatar;
