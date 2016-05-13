@@ -44,7 +44,7 @@ public class UserEntityDao implements IUserEntityDao {
 		List<UserEntity> users = new ArrayList<UserEntity>();
 
 		users = sessionFactory.getCurrentSession()
-			.createQuery("from User where username=?")
+			.createQuery("from UserEntity where username=?")
 			.setParameter(0, username)
 			.list();
 
@@ -57,12 +57,12 @@ public class UserEntityDao implements IUserEntityDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public UserEntity findByName(String name) {
+	public UserEntity findByNickname(String nickname) {
 		List<UserEntity> users = new ArrayList<UserEntity>();
 
 		users = sessionFactory.getCurrentSession()
-			.createQuery("from User where name=?")
-			.setParameter(0, name)
+			.createQuery("from UserEntity where nickname=?")
+			.setParameter(0, nickname)
 			.list();
 
 		if (users.size() > 0) {
@@ -70,5 +70,50 @@ public class UserEntityDao implements IUserEntityDao {
 		} else {
 			return null;
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public UserEntity findByPhone(String phone) {
+		List<UserEntity> users = new ArrayList<UserEntity>();
+
+		users = sessionFactory.getCurrentSession()
+			.createQuery("from UserEntity where phone=?")
+			.setParameter(0, phone)
+			.list();
+
+		if (users.size() > 0) {
+			return users.get(0);
+		} else {
+			return null;
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public UserEntity findByEmail(String email) {
+		List<UserEntity> users = new ArrayList<UserEntity>();
+
+		users = sessionFactory.getCurrentSession()
+			.createQuery("from UserEntity where "
+					+ "email=?")
+			.setParameter(0, email)
+			.list();
+
+		if (users.size() > 0) {
+			return users.get(0);
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	public UserEntity get(int id) {
+		return (UserEntity) sessionFactory.getCurrentSession().get(UserEntity.class, id);
+	}
+
+	@Override
+	public UserEntity getRef(int id) {
+		return (UserEntity) sessionFactory.getCurrentSession().load(UserEntity.class, id);
 	}
 }

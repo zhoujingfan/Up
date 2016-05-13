@@ -156,7 +156,7 @@ public class WeiboEntity  implements java.io.Serializable {
         this.position = position;
     }
 
-    @Column(name="time", nullable=false, length=19)
+    @Column(name="time", length=19, columnDefinition="TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP")
 
     public Timestamp getTime() {
         return this.time;
