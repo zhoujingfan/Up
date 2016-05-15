@@ -95,8 +95,7 @@ public class UserEntityDao implements IUserEntityDao {
 		List<UserEntity> users = new ArrayList<UserEntity>();
 
 		users = sessionFactory.getCurrentSession()
-			.createQuery("from UserEntity where "
-					+ "email=?")
+			.createQuery("from UserEntity where email=?")
 			.setParameter(0, email)
 			.list();
 
@@ -115,5 +114,22 @@ public class UserEntityDao implements IUserEntityDao {
 	@Override
 	public UserEntity getRef(int id) {
 		return (UserEntity) sessionFactory.getCurrentSession().load(UserEntity.class, id);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean hasAvatar(String username) {
+		List<UserEntity> users = new ArrayList<UserEntity>();
+
+		users = sessionFactory.getCurrentSession()
+			.createQuery("from UserEntity where username=? and avatar is not null")
+			.setParameter(0, username)
+			.list();
+
+		if (users.size() == 1) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

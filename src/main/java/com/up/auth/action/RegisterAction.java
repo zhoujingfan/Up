@@ -1,6 +1,5 @@
 package com.up.auth.action;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,9 +13,6 @@ public class RegisterAction extends ActionSupport{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private File fileUpload;
-	private String fileUploadContentType;
-	private String fileUploadFileName;
 	private String username;
 	private String password;
 	private String confirmPassword;
@@ -98,7 +94,6 @@ public class RegisterAction extends ActionSupport{
 	}
 	@Override
 	public String execute() throws Exception {
-		if(getUsername()==null)return INPUT;
 		String tmp=userService.register(getUsername(), getConfirmPassword(), getEmail(), getPhone(), getNickname(), getAddress(), getSignature(), getGender());
 		if(tmp.equals("success")){
 			return SUCCESS;
@@ -136,29 +131,14 @@ public class RegisterAction extends ActionSupport{
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public String getFileUploadContentType() {
-		return fileUploadContentType;
-	}
-	public void setFileUploadContentType(String fileUploadContentType) {
-		this.fileUploadContentType = fileUploadContentType;
-	}
-	public String getFileUploadFileName() {
-		return fileUploadFileName;
-	}
-	public void setFileUploadFileName(String fileUploadFileName) {
-		this.fileUploadFileName = fileUploadFileName;
-	}
-	public File getFileUpload() {
-		return fileUpload;
-	}
-	public void setFileUpload(File fileUpload) {
-		this.fileUpload = fileUpload;
-	}
 	public List<String> getGenderList() {
 		return genderList;
 	}
 	public void setGenderList(List<String> genderList) {
 		this.genderList = genderList;
+	}
+	public String inputForRegister(){
+		return SUCCESS;
 	}
 }
 	

@@ -23,8 +23,8 @@
 			<s:textfield name="signature" placeholder="Signature"/>
 			<s:textfield name="address" placeholder="Address"/>
 			<s:radio name="gender" list="genderList" label="Gender"/>
-			<s:submit value="Sign Up"/>
 			<sec:csrfInput />
+			<s:submit value="Sign Up"/>
 		</s:form>
 	</div>
 </body>

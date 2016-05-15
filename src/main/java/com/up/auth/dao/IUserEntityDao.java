@@ -10,4 +10,5 @@ public interface IUserEntityDao {
 	UserEntity findByNickname(String nickname);
 	UserEntity findByPhone(String phone);
 	UserEntity findByEmail(String email);
+	boolean hasAvatar(String username);
 }

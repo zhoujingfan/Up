@@ -6,6 +6,9 @@
 <struts>
 
 	<constant name="struts.devMode" value="true" />
+	<constant name="struts.multipart.parser" value="spring" />
+	<bean type="org.apache.struts2.dispatcher.multipart.MultiPartRequest"
+		name="spring" class="com.up.config.SpringMultipartParser" scope="default" />
 
 	<package name="auth" extends="struts-default" namespace="/auth">
 		<action name="index">
@@ -19,6 +22,19 @@
 		<action name="register" class="registerAction" method="execute">
 			<result name="success">/thankyou.jsp</result>
 			<result name="input">/register.jsp</result>
+		</action>
+
+		<action name="registerInput" class="registerAction" method="inputForRegister">
+			<result name="success">/register.jsp</result>
+		</action>
+
+		<action name="login">
+			<result>/login.jsp</result>
+		</action>
+
+		<action name="avatar" class="avatarAction" method="execute">
+			<result name="success">/avatar.jsp</result>
+			<result name="input">/avatar.jsp</result>
 		</action>
 	</package>
 </struts>
