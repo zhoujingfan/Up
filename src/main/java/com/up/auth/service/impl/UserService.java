@@ -11,7 +11,6 @@ import com.up.model.UserEntity;
 
 @Service("userService")
 public class UserService implements IUserService {
-	//TODO Update all the service class to match the new dao;
 	@Autowired
 	private IBaseDao<UserEntity> userDao;
 

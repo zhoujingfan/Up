@@ -14,5 +14,6 @@
 <s:property value="user.getUsername()"/>
 <s:property value="user.getNickname()"/>
 <s:property value="user.getGender()"/>
+<s:property value="weiboAmount"/>
 </body>
 </html>

@@ -12,11 +12,11 @@
 
 	<package name="auth" extends="struts-default" namespace="/auth">
 		<action name="index">
-			<result>/index.jsp</result>
+			<result>/auth/index.jsp</result>
 		</action>
 
 		<action name="hello" class="helloAction" method="execute">
-			<result name="success">/Hello.jsp</result>
+			<result name="success">/auth/Hello.jsp</result>
 		</action>
 
 		<action name="register" class="registerAction" method="execute">
@@ -43,6 +43,12 @@
 		
 		<action name="myProfile" class="myProfileAction">
 			<result name="success">/auth/myProfile.jsp</result>
+		</action>
+	</package>
+	
+	<package name="weibo" extends="structs-default" namespace="/weibo">
+		<action name="index">
+			<result>/weibo/index.jsp</result>
 		</action>
 	</package>
 </struts>

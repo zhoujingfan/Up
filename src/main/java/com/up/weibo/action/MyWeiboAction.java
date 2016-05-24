@@ -1,28 +1,34 @@
-package com.up.auth.action;
+package com.up.weibo.action;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.up.auth.service.IUserService;
-import com.up.model.UserEntity;
+import com.up.model.WeiboEntity;
 import com.up.weibo.service.IWeiboService;
 
-public class MyProfileAction extends ActionSupport {
+public class MyWeiboAction extends ActionSupport {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private List<WeiboEntity> weiboList;
 	@Autowired
 	private IWeiboService weiboService;
-	@Autowired
-	private IUserService userService;
-	
-	private UserEntity user;
-	private int weiboAmount;
-	
+
+	public List<WeiboEntity> getWeiboList() {
+		return weiboList;
+	}
+
+	public void setWeiboList(List<WeiboEntity> weiboList) {
+		this.weiboList = weiboList;
+	}
+
 	@Override
 	public String execute() throws Exception {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -32,8 +38,7 @@ public class MyProfileAction extends ActionSupport {
 		} else {
 			username = principal.toString();
 		}
-		user=userService.loadUserByUsername(username);
-		weiboAmount = weiboService.getWeiboAmount(username);
+		weiboList = weiboService.getWeibo(username);
 		return SUCCESS;
 	}
 
@@ -42,21 +47,4 @@ public class MyProfileAction extends ActionSupport {
 		// TODO Auto-generated method stub
 		super.validate();
 	}
-
-	public UserEntity getUser() {
-		return user;
-	}
-
-	public void setUser(UserEntity user) {
-		this.user = user;
-	}
-
-	public int getWeiboAmount() {
-		return weiboAmount;
-	}
-
-	public void setWeiboAmount(int weiboAmount) {
-		weiboAmount = weiboAmount;
-	}
-
 }
