@@ -3,55 +3,95 @@ package com.up.auth.action;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.net.URI;
+import java.util.Date;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.struts2.ServletActionContext;
+import org.aspectj.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.microsoft.azure.storage.*;
 import com.microsoft.azure.storage.blob.*;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.util.logging.Logger;
+import com.opensymphony.xwork2.util.logging.LoggerFactory;
 import com.up.auth.service.IUserService;
 
 public class AvatarAction extends ActionSupport {
-	
-	public static final String storageConnectionString =
-	        "DefaultEndpointsProtocol=http;"
-	        + "AccountName=whatsup;"
-	        + "AccountKey=peVXdurvLZYy8uiRaQnZZwfQpFQhQ9EwnKKkkIS8rklnc+fZqOsrG7ngV5fWB586p0Rf9zdC1HHsOkOX97q4Ww==;"+
-	        "EndpointSuffix=core.chinacloudapi.cn";
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private File myFile;
-	private String myFileContentType;
-	private String myFileFileName;
-	private String destUri;
-	
 	@Autowired
-	public IUserService userService;
+	IUserService userService;
+	public static final String storageConnectionString = "DefaultEndpointsProtocol=http;" + "AccountName=whatsup;"
+			+ "AccountKey=peVXdurvLZYy8uiRaQnZZwfQpFQhQ9EwnKKkkIS8rklnc+fZqOsrG7ngV5fWB586p0Rf9zdC1HHsOkOX97q4Ww==;"
+			+ "EndpointSuffix=core.chinacloudapi.cn";
+	private File upload;
+	private String uploadContentType;
+	private String uploadFileName;
+	private String destUri;
 
-	public File getMyFile() {
-		return myFile;
+	@Override
+	public String execute() throws Exception {
+		try {
+			CloudStorageAccount account = CloudStorageAccount.parse(storageConnectionString);
+			CloudBlobClient serviceClient = account.createCloudBlobClient();
+
+			// Container name must be lower case.
+			CloudBlobContainer container = serviceClient.getContainerReference("avatar");
+
+			// Upload an image file.
+			CloudBlockBlob blob = container.getBlockBlobReference(upload.getName());
+			blob.upload(new FileInputStream(upload), upload.length());
+			setDestUri(blob.getUri().toString());
+			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			String username;
+			if (principal instanceof UserDetails) {
+				username = ((UserDetails) principal).getUsername();
+			} else {
+				username = principal.toString();
+			}
+			userService.setAvatar(username, destUri);
+		} catch (FileNotFoundException fileNotFoundException) {
+			addFieldError("upload", "File not exist!");
+			return INPUT;
+		} catch (StorageException storageException) {
+			addFieldError("upload", "Storage Exception!");
+			return INPUT;
+		} catch (Exception e) {
+			addFieldError("upload", "error:" + e.getMessage());
+			return INPUT;
+		}
+		return SUCCESS;
 	}
 
-	public void setMyFile(File myFile) {
-		this.myFile = myFile;
+	public File getUpload() {
+		return upload;
 	}
 
-	public String getMyFileContentType() {
-		return myFileContentType;
+	public void setUpload(File upload) {
+		this.upload = upload;
 	}
 
-	public void setMyFileContentType(String myFileContentType) {
-		this.myFileContentType = myFileContentType;
+	public String getUploadContentType() {
+		return uploadContentType;
 	}
 
-	public String getMyFileFileName() {
-		return myFileFileName;
+	public void setUploadContentType(String uploadContentType) {
+		this.uploadContentType = uploadContentType;
 	}
 
-	public void setMyFileFileName(String myFileFileName) {
-		this.myFileFileName = myFileFileName;
+	public String getUploadFileName() {
+		return uploadFileName;
+	}
+
+	public void setUploadFileName(String uploadFileName) {
+		this.uploadFileName = uploadFileName;
 	}
 
 	public String getDestUri() {
@@ -63,39 +103,14 @@ public class AvatarAction extends ActionSupport {
 	}
 
 	@Override
-	public String execute() throws Exception {
-		//if(myFile==null)return INPUT;
-		try {
-            CloudStorageAccount account = CloudStorageAccount.parse(storageConnectionString);
-            CloudBlobClient serviceClient = account.createCloudBlobClient();
-
-            // Container name must be lower case.
-            CloudBlobContainer container = serviceClient.getContainerReference("avatar");
-            container.createIfNotExists();
-
-            // Upload an image file.
-            CloudBlockBlob blob = container.getBlockBlobReference(String.valueOf(myFileContentType.hashCode())+".jpg");
-            blob.upload(new FileInputStream(myFile), myFile.length());
-            destUri=blob.getUri().toString();
-        }
-        catch (FileNotFoundException fileNotFoundException) {
-            addFieldError("myFile","File not exist!");
-            return INPUT;
-        }
-        catch (StorageException storageException) {
-            addFieldError("myFile","Storage Exception!");
-            return INPUT;
-        }
-        catch (Exception e) {
-            addFieldError("myFile",e.getMessage());
-            return INPUT;
-        }
-		destUri="http://p2.ifengimg.com/a/2016_20/7ca1fa9d8508112_size833_w1024_h645.jpg";
-		return SUCCESS;
+	public void validate() {
+		if (upload == null)
+			addFieldError("upload", "error in validate");
+		super.validate();
 	}
 
 	@Override
-	public void validate() {
-		if(myFile==null)addFieldError("myFile","File is null!");
+	public String input() throws Exception {
+		return SUCCESS;
 	}
 }
