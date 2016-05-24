@@ -6,12 +6,14 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.up.dao.IBaseDao;
 import com.up.model.UserEntity;
 import com.up.model.WeiboEntity;
 import com.up.weibo.service.IWeiboService;
 
+@Service("weiboService")
 public class WeiboService implements IWeiboService {
 	
 	@Autowired
@@ -36,14 +38,14 @@ public class WeiboService implements IWeiboService {
 	public List<WeiboEntity> getWeibo(String username) {
 		List<Object> param = new ArrayList<Object>();
 		param.add(username);
-		return weiboDao.find("from WeiboEntity w where w.userEntity.username=?", param);
+		return weiboDao.find("from WeiboEntity w join w.userEntity u where u.username=?", param);
 	}
 
 	@Override
-	public int getWeiboAmount(String username) {
+	public Long getWeiboAmount(String username) {
 		List<Object> param = new ArrayList<Object>();
 		param.add(username);
-		return weiboDao.executeHql("select count(w) from WeiboEntity w where w.userEntity.username=?", param);
+		return weiboDao.count("select count(w) from WeiboEntity w join w.userEntity u where u.username=?", param);
 	}
 
 }

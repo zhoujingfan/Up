@@ -46,7 +46,7 @@
 		</action>
 	</package>
 	
-	<package name="weibo" extends="structs-default" namespace="/weibo">
+	<package name="weibo" extends="struts-default" namespace="/weibo">
 		<action name="index">
 			<result>/weibo/index.jsp</result>
 		</action>

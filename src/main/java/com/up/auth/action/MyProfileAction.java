@@ -21,7 +21,7 @@ public class MyProfileAction extends ActionSupport {
 	private IUserService userService;
 	
 	private UserEntity user;
-	private int weiboAmount;
+	private Long weiboAmount;
 	
 	@Override
 	public String execute() throws Exception {
@@ -51,12 +51,12 @@ public class MyProfileAction extends ActionSupport {
 		this.user = user;
 	}
 
-	public int getWeiboAmount() {
+	public Long getWeiboAmount() {
 		return weiboAmount;
 	}
 
-	public void setWeiboAmount(int weiboAmount) {
-		weiboAmount = weiboAmount;
+	public void setWeiboAmount(Long weiboAmount) {
+		this.weiboAmount = weiboAmount;
 	}
 
 }
