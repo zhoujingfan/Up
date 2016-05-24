@@ -30,25 +30,29 @@ public class SpringMultipartParser implements MultiPartRequest {
 	private MultipartHttpServletRequest multipartRequest;
 
 	private MultiValueMap<String, File> multiFileMap = new LinkedMultiValueMap<String, File>();
+	
+	private File dir;
 
 	@Override
 	public void parse(HttpServletRequest request, String saveDir) throws IOException {
 		multipartRequest = WebUtils.getNativeRequest(request, MultipartHttpServletRequest.class);
-
 		if (multipartRequest == null) {
 			LOG.warn("Unable to MultipartHttpServletRequest");
 			errors.add("Unable to MultipartHttpServletRequest");
 			return;
 		}
 		multipartMap = multipartRequest.getMultiFileMap();
-		for (Entry<String, List<MultipartFile>> fileEntry : multipartMap.entrySet()) {
-			String fieldName = fileEntry.getKey();
-			for (MultipartFile file : fileEntry.getValue()) {
-				File temp = File.createTempFile("upload", ".dat");
-				file.transferTo(temp);
-				multiFileMap.add(fieldName, temp);
-			}
-		}
+		dir = new File(saveDir);
+		if(!dir.exists())dir.mkdirs();
+		// for(Entry<String, List<MultipartFile>> fileEntry :
+		// multipartMap.entrySet()) {
+		// String fieldName = fileEntry.getKey();
+		// for(MultipartFile file : fileEntry.getValue()) {
+		// File temp = File.createTempFile("upload", ".dat");
+		// file.transferTo(temp);
+		// multiFileMap.add(fieldName, temp);
+		// }
+		// }
 	}
 
 	@Override
@@ -72,8 +76,19 @@ public class SpringMultipartParser implements MultiPartRequest {
 
 	@Override
 	public File[] getFile(String fieldName) {
-		List<File> files = multiFileMap.get(fieldName);
-		return files == null ? null : files.toArray(new File[files.size()]);
+		List<MultipartFile> files = multipartMap.get(fieldName);
+		File[] result = new File[files.size()];
+		for(int i=0;i<result.length;i++){
+			try {
+				File temp = File.createTempFile("upload", ".dat",dir);
+				files.get(i).transferTo(temp);
+				result[i]=temp;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return result;
 	}
 
 	@Override

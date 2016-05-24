@@ -14,13 +14,14 @@ import com.up.model.UserEntity;
 /**
  * IUserDao接口的实现
  * 实际上这两个文件也可以命名为IUserRepository和UserRepository，因为都是用了Repository的Annotation
+ * 
  * @author tyche
  *
  */
 @Repository
 @Transactional
 public class UserEntityDao implements IUserEntityDao {
-	
+
 	/**
 	 * 获取在Application.java文件当中的Bean，调用UserDao中的函数时该对象会自动的生成
 	 */
@@ -43,10 +44,8 @@ public class UserEntityDao implements IUserEntityDao {
 	public UserEntity findByUserName(String username) {
 		List<UserEntity> users = new ArrayList<UserEntity>();
 
-		users = sessionFactory.getCurrentSession()
-			.createQuery("from UserEntity where username=?")
-			.setParameter(0, username)
-			.list();
+		users = sessionFactory.getCurrentSession().createQuery("from UserEntity where username=?")
+				.setParameter(0, username).list();
 
 		if (users.size() > 0) {
 			return users.get(0);
@@ -60,10 +59,8 @@ public class UserEntityDao implements IUserEntityDao {
 	public UserEntity findByNickname(String nickname) {
 		List<UserEntity> users = new ArrayList<UserEntity>();
 
-		users = sessionFactory.getCurrentSession()
-			.createQuery("from UserEntity where nickname=?")
-			.setParameter(0, nickname)
-			.list();
+		users = sessionFactory.getCurrentSession().createQuery("from UserEntity where nickname=?")
+				.setParameter(0, nickname).list();
 
 		if (users.size() > 0) {
 			return users.get(0);
@@ -77,10 +74,8 @@ public class UserEntityDao implements IUserEntityDao {
 	public UserEntity findByPhone(String phone) {
 		List<UserEntity> users = new ArrayList<UserEntity>();
 
-		users = sessionFactory.getCurrentSession()
-			.createQuery("from UserEntity where phone=?")
-			.setParameter(0, phone)
-			.list();
+		users = sessionFactory.getCurrentSession().createQuery("from UserEntity where phone=?").setParameter(0, phone)
+				.list();
 
 		if (users.size() > 0) {
 			return users.get(0);
@@ -94,10 +89,8 @@ public class UserEntityDao implements IUserEntityDao {
 	public UserEntity findByEmail(String email) {
 		List<UserEntity> users = new ArrayList<UserEntity>();
 
-		users = sessionFactory.getCurrentSession()
-			.createQuery("from UserEntity where email=?")
-			.setParameter(0, email)
-			.list();
+		users = sessionFactory.getCurrentSession().createQuery("from UserEntity where email=?").setParameter(0, email)
+				.list();
 
 		if (users.size() > 0) {
 			return users.get(0);
@@ -122,14 +115,28 @@ public class UserEntityDao implements IUserEntityDao {
 		List<UserEntity> users = new ArrayList<UserEntity>();
 
 		users = sessionFactory.getCurrentSession()
-			.createQuery("from UserEntity where username=? and avatar is not null")
-			.setParameter(0, username)
-			.list();
+				.createQuery("from UserEntity where username=? and avatar is not null").setParameter(0, username)
+				.list();
 
 		if (users.size() == 1) {
 			return true;
 		} else {
 			return false;
 		}
+	}
+
+	@Override
+	public void update(UserEntity user) {
+		sessionFactory.getCurrentSession().update(user);
+		sessionFactory.getCurrentSession().refresh(user);
+	}
+
+	@Override
+	public UserEntity getRef(String username) {
+		UserEntity tmp = (UserEntity)sessionFactory.getCurrentSession()
+				.createQuery("from UserEntity where username=?")
+				.setParameter(0, username)
+				.list().get(0);
+		return (UserEntity) sessionFactory.getCurrentSession().load(UserEntity.class, tmp.getId());
 	}
 }

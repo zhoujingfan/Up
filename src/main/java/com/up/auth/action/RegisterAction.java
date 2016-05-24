@@ -94,12 +94,11 @@ public class RegisterAction extends ActionSupport{
 	}
 	@Override
 	public String execute() throws Exception {
-		String tmp=userService.register(getUsername(), getConfirmPassword(), getEmail(), getPhone(), getNickname(), getAddress(), getSignature(), getGender());
-		if(tmp.equals("success")){
+		try{
+			userService.register(getUsername(), getConfirmPassword(), getEmail(), getPhone(), getNickname(), getAddress(), getSignature(), getGender());
 			return SUCCESS;
 		}
-		else{
-			addFieldError("username", tmp);
+		catch( Exception e){
 			return INPUT;
 		}
 	}

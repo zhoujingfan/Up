@@ -12,29 +12,43 @@
 
 	<package name="auth" extends="struts-default" namespace="/auth">
 		<action name="index">
-			<result>/index.jsp</result>
+			<result>/auth/index.jsp</result>
 		</action>
 
 		<action name="hello" class="helloAction" method="execute">
-			<result name="success">/Hello.jsp</result>
+			<result name="success">/auth/Hello.jsp</result>
 		</action>
 
 		<action name="register" class="registerAction" method="execute">
-			<result name="success">/thankyou.jsp</result>
-			<result name="input">/register.jsp</result>
+			<result name="success">/auth/thankyou.jsp</result>
+			<result name="input">/auth/register.jsp</result>
 		</action>
 
 		<action name="registerInput" class="registerAction" method="inputForRegister">
-			<result name="success">/register.jsp</result>
+			<result name="success">/auth/register.jsp</result>
 		</action>
 
 		<action name="login">
-			<result>/login.jsp</result>
+			<result>/auth/login.jsp</result>
 		</action>
 
-		<action name="avatar" class="avatarAction" method="execute">
-			<result name="success">/avatar.jsp</result>
-			<result name="input">/avatar.jsp</result>
+		<action name="avatar" class="avatarAction">
+			<result name="success">/auth/avatar.jsp</result>
+			<result name="input">/auth/avatar.jsp</result>
+		</action>
+		
+		<action name="avatarInput" class="avatarAction" method="input">
+			<result name="success">/auth/avatar.jsp</result>
+		</action>
+		
+		<action name="myProfile" class="myProfileAction">
+			<result name="success">/auth/myProfile.jsp</result>
+		</action>
+	</package>
+	
+	<package name="weibo" extends="struts-default" namespace="/weibo">
+		<action name="index">
+			<result>/weibo/index.jsp</result>
 		</action>
 	</package>
 </struts>

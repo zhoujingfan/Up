@@ -14,12 +14,11 @@
 		Here is your personal information.<br>Username:
 		<s:property value="username" />
 	</p>
-	<form action="avatar" method="post" enctype="multipart/form-data">
-		<label for="myFile">Upload your avatar</label>
-		<input type="file" name="myFile" />
-		<input type="hidden" name="${_csrf.parameterName}"
-                value="${_csrf.token}" />
-		<input type="submit" value="submit"/>
-	</form>
+	<s:form action="avatar" method="POST" enctype="multipart/form-data">
+		<s:file name="upload" label="Upload your avatar" />
+		<s:submit value="submit"/>
+		<s:hidden name="%{#attr._csrf.parameterName}"
+			value="%{#attr._csrf.token}" />
+	</s:form>
 </body>
 </html>

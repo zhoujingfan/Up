@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.up.auth.action.AvatarAction;
 import com.up.auth.action.HelloAction;
+import com.up.auth.action.MyProfileAction;
 import com.up.auth.action.RegisterAction;
 
 /**
@@ -27,5 +28,10 @@ public class BeanConfig {
 	@Bean
 	public AvatarAction avatarAction(){
 		return new AvatarAction();
+	}
+	
+	@Bean
+	public MyProfileAction myProfileAction(){
+		return new MyProfileAction();
 	}
 }
