@@ -26,6 +26,8 @@ public class FollowAction  extends ActionSupport{
 	@Autowired
 	private FollowService followservice;
 
+	private int follownums;
+	private int fansnums;
 	@Autowired
 	private IFollowDao followDao;
 	
@@ -34,7 +36,22 @@ public class FollowAction  extends ActionSupport{
 	private List<String> follownames = new ArrayList<String>();
 	private List<FollowEntity> followEntity = new ArrayList<FollowEntity>();
 	
+
+	public void setFollownums(int follownums){
+		this.follownums = follownums;
+	}
 	
+	public int getFollownums(){
+		return this.follownums;
+	}
+
+	public void setFansnums(int fansnums){
+		this.fansnums = fansnums;
+	}
+	
+	public int getFansnums(){
+		return this.follownums;
+	}
 	public void setFollownames(List<String> follownames){
 		this.follownames = follownames;
 	}
@@ -122,18 +139,46 @@ public class FollowAction  extends ActionSupport{
 		FollowEntity follow = new FollowEntity();
 		for(int i=0;i<followEntity.size();i++){
 			follow = followEntity.get(i);
-			follownames.add(follow.getUserEntityByFollowUserId().getUsername());
+			follownames.add(follow.getUserEntityByFollowUserId().getNickname());
 		}
+		
+	setFollownums(followDao.getFollowNum(user_A.getId()));
+	setFansnums(followDao.getFansNum(user_A.getId()));
+	
 	}
 	
 	public String ListFollow(){
-		show();
 		setMessage();
 		return SUCCESS;
 	}
 	
-	public String delete(){
+	public String deletefollow(){
+
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String namess=null;
+		if (principal instanceof UserDetails) {
+			namess = ((UserDetails)principal).getUsername();
+		} else {
+			namess = principal.toString();
+		}
+		UserEntity user_A = iuserEntityDao.findByUserName(namess);
+		followEntity = followDao.findFollowByUser(user_A.getId());
+		FollowEntity follow = new FollowEntity();
+		for(int i=0;i<followEntity.size();i++){
+			follow = followEntity.get(i);
+			followuser = follow.getUserEntityByFollowUserId();
+			if(getUsername().equals(followuser.getUsername())){
+				followDao.deleteFollow(user_A.getId(), (followuser.getId()));
+				setMessage("已经取消关注");
+				show();
+				return  SUCCESS;
+			}
+		}
+		setMessage("你没有关注过这个用户");
 		
+		return SUCCESS;
+	}
+	public String cancelfollow(){
 		return SUCCESS;
 	}
 }

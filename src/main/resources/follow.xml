@@ -21,6 +21,14 @@
 			<result	name="nouser">/follow/Follow.jsp</result>
 			
 		</action>
+		
+		<action name="deletefollow" class="com.up.follow.action.FollowAction" method="deletefollow">
+			<result name="success">/follow/Follow.jsp</result>
+		</action>
+		
+		<action name="cancelfollow" class="com.up.follow.action.FollowAction" method="cancelfollow">
+			<result name="success">/follow/deletefollow.jsp</result>
+		</action>
 	</package>
 	
 </struts>

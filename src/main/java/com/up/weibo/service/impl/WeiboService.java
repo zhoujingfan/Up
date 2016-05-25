@@ -38,7 +38,7 @@ public class WeiboService implements IWeiboService {
 	public List<WeiboEntity> getWeiboByUsername(String username) {
 		List<Object> param = new ArrayList<Object>();
 		param.add(username);
-		return weiboDao.find("select w from WeiboEntity w join w.userEntity u where u.username=? order by w.time", param);
+		return weiboDao.find("select w from WeiboEntity w join w.userEntity u where u.username=? order by w.time desc", param);
 	}
 
 	@Override
@@ -46,6 +46,18 @@ public class WeiboService implements IWeiboService {
 		List<Object> param = new ArrayList<Object>();
 		param.add(username);
 		return weiboDao.count("select count(w) from WeiboEntity w join w.userEntity u where u.username=?", param);
+	}
+
+	@Override
+	public List<WeiboEntity> getAllWeibo() {
+		return weiboDao.find("from WeiboEntity");
+	}
+
+	@Override
+	public List<WeiboEntity> getWeiboByNickname(String nickname) {
+		List<Object> param = new ArrayList<Object>();
+		param.add(nickname);
+		return weiboDao.find("select w from WeiboEntity w join w.userEntity u where u.nickname=? order by w.time desc", param);
 	}
 
 }
