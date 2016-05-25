@@ -106,7 +106,7 @@ public class WeiboEntity  implements java.io.Serializable {
         this.userEntity = userEntity;
     }
 	@ManyToOne(fetch=FetchType.LAZY)
-        @JoinColumn(name="device_id", nullable=false)
+        @JoinColumn(name="device_id", nullable=true)
 
     public DeviceEntity getDeviceEntity() {
         return this.deviceEntity;
@@ -156,7 +156,7 @@ public class WeiboEntity  implements java.io.Serializable {
         this.position = position;
     }
 
-    @Column(name="time", nullable=false, length=19)
+    @Column(name="time", length=19, columnDefinition="TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP")
 
     public Timestamp getTime() {
         return this.time;

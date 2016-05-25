@@ -5,13 +5,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Hello World!</title>
 </head>
 <body>
-	<h1>Thank you for your register.</h1>
-	<p class="lead">
-		Here is your personal information.<br>Username:
-		<s:property value="username" />
-	</p>
+	<h2>
+		<s:property value="message" />
+	</h2>
 </body>
 </html>

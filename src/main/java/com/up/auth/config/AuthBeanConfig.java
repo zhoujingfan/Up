@@ -3,7 +3,9 @@ package com.up.auth.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.up.auth.action.AvatarAction;
 import com.up.auth.action.HelloAction;
+import com.up.auth.action.MyProfileAction;
 import com.up.auth.action.RegisterAction;
 
 /**
@@ -12,7 +14,7 @@ import com.up.auth.action.RegisterAction;
  *
  */
 @Configuration
-public class BeanConfig {
+public class AuthBeanConfig {
 	@Bean
 	public HelloAction helloAction(){
 		return new HelloAction();
@@ -23,5 +25,13 @@ public class BeanConfig {
 		return new RegisterAction();
 	}
 	
+	@Bean
+	public AvatarAction avatarAction(){
+		return new AvatarAction();
+	}
 	
+	@Bean
+	public MyProfileAction myProfileAction(){
+		return new MyProfileAction();
+	}
 }
