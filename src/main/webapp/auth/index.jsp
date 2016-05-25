@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,5 +14,9 @@
 <p><a href="<s:url action='hello'/>">Hello World</a></p>
 <a href="<s:url action='myProfile'/>">My Profile</a>
 <p><a href="<s:url action='follow'/>">My Follow</a></p>
+<form action="logout" method="post">
+	<sec:csrfInput/>
+	<input type="submit" value="Log out"/>
+</form>
 </body>
 </html>
