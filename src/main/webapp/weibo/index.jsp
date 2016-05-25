@@ -5,11 +5,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Hello World!</title>
+<title>Insert title here</title>
 </head>
-<body> 
-	<h2>
-		<s:property value="message" />
-	</h2>
+<body>
+	<a href="<s:url action='publishInput'/>">Publish</a>
+	<a href="<s:url action='myWeibo'/>">My Weibo</a>
 </body>
 </html>
