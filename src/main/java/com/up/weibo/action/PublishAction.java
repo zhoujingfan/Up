@@ -44,4 +44,9 @@ public class PublishAction extends ActionSupport {
 		this.content = content;
 	}
 
+	@Override
+	public String input() throws Exception {
+		return SUCCESS;
+	}
+
 }

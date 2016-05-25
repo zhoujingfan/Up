@@ -10,6 +10,6 @@
 <body>
 <h1>Welcome To Struts 2!</h1>
 <p><a href="<s:url action='hello'/>">Hello World</a></p>
-<a href="<s:url action='auth/myProfile'/>">My Profile</a>
+<a href="<s:url action='myProfile'/>">My Profile</a>
 </body>
 </html>

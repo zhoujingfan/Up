@@ -35,10 +35,10 @@ public class WeiboService implements IWeiboService {
 	}
 
 	@Override
-	public List<WeiboEntity> getWeibo(String username) {
+	public List<WeiboEntity> getWeiboByUsername(String username) {
 		List<Object> param = new ArrayList<Object>();
 		param.add(username);
-		return weiboDao.find("from WeiboEntity w join w.userEntity u where u.username=?", param);
+		return weiboDao.find("select w from WeiboEntity w join w.userEntity u where u.username=? order by w.time", param);
 	}
 
 	@Override

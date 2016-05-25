@@ -106,7 +106,7 @@ public class WeiboEntity  implements java.io.Serializable {
         this.userEntity = userEntity;
     }
 	@ManyToOne(fetch=FetchType.LAZY)
-        @JoinColumn(name="device_id", nullable=false)
+        @JoinColumn(name="device_id", nullable=true)
 
     public DeviceEntity getDeviceEntity() {
         return this.deviceEntity;
