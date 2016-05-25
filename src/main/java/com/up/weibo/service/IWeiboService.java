@@ -9,4 +9,5 @@ public interface IWeiboService {
 	public List<WeiboEntity> getWeiboByUsername(String username);
 	public Long getWeiboAmount(String username);
 	public List<WeiboEntity> getAllWeibo();
+	public List<WeiboEntity> getWeiboByNickname(String nickname);
 }
