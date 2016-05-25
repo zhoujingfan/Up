@@ -11,7 +11,6 @@
 <title>My Weibo</title>
 </head>
 <body>
-	<s:property value="weiboList" />
 	<s:iterator value="weiboList" var="weibo">
 		<s:property value="#weibo.getContent()"/>
 		<s:property value="#weibo.getTime()"/>

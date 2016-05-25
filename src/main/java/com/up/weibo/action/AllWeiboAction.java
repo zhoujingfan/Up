@@ -3,23 +3,22 @@ package com.up.weibo.action;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.up.model.WeiboEntity;
 import com.up.weibo.service.IWeiboService;
 
-public class MyWeiboAction extends ActionSupport {
-
+public class AllWeiboAction extends ActionSupport {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private List<WeiboEntity> weiboList;
 	@Autowired
 	private IWeiboService weiboService;
+	
+	private List<WeiboEntity> weiboList;
+
 
 	public List<WeiboEntity> getWeiboList() {
 		return weiboList;
@@ -31,14 +30,7 @@ public class MyWeiboAction extends ActionSupport {
 
 	@Override
 	public String execute() throws Exception {
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String username;
-		if (principal instanceof UserDetails) {
-			username = ((UserDetails) principal).getUsername();
-		} else {
-			username = principal.toString();
-		}
-		weiboList = weiboService.getWeiboByUsername(username);
+		weiboList = weiboService.getAllWeibo();
 		return SUCCESS;
 	}
 
@@ -47,4 +39,6 @@ public class MyWeiboAction extends ActionSupport {
 		// TODO Auto-generated method stub
 		super.validate();
 	}
+	
+	
 }

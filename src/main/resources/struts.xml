@@ -64,4 +64,25 @@
 			<result name="success">/weibo/myWeibo.jsp</result>
 		</action>
 	</package>
+	
+	<package name="weiboApi" extends="json-default" namespace="/api/weibo">
+		<action name="all" class="allWeiboAction">
+			<result name="success" type="json"/>
+		</action>
+	</package>
+	
+	<package name="search" extends="struts-default" namespace="/search">
+		<action name="index">
+			<result>/search/index.jsp</result>
+		</action>
+	</package>
+	
+	<package name="searchApi" extends="json-default" namespace="/api/search">
+		<action name="searchUser" class="searchUserAction">
+			<result name="success" type="json">
+				 <param name="excludeProperties">resultList.*\.passwordHash</param>
+			</result>
+		</action>
+	</package>
+	
 </struts>
