@@ -38,7 +38,7 @@
 	<div class="container">
 <p><a href="<s:url action='index'/>">我的首页</a></p>
 		<s:form action="addfollow">
-			<h3>add follow</h3>
+			<h3>请输入你想要关注的人的名字</h3>
 			<s:textfield name="username"/><s:property value="message"/>
 			<s:submit value="Yes"/>
 				<sec:csrfInput />
