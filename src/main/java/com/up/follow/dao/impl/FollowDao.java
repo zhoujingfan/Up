@@ -45,12 +45,15 @@ public class FollowDao implements IFollowDao{
 		return followEntity;
 	}
 	@Override
-	public void deleteFollow(int user_id, int follow_user_id) {
+	public void deleteFollow(int user_Id, int follow_user_Id) {
 		// TODO Auto-generated method stub
-		String sql = "delete from FollowEntity where follow_user_id = " + follow_user_id + " && user_id = " + user_id;
-		sessionFactory.getCurrentSession().createSQLQuery(sql);
+		sessionFactory.getCurrentSession()
+			.createQuery("delete FollowEntity where user_id = ? and follow_user_id = ?")
+			.setParameter(0, user_Id)
+			.setParameter(1, follow_user_Id)
+			.executeUpdate();
 	}
-	@Override
+	@Override	
 	public int getFollowNum(int userId) {
 		// TODO Auto-generated method stub
 		return findFollowByUser(userId).size();
@@ -58,7 +61,8 @@ public class FollowDao implements IFollowDao{
 	@Override
 	public int getFansNum(int userId) {
 		// TODO Auto-generated method stub
-		return findFollowByFollowUser(userId).size();
+		int i= findFollowByFollowUser(userId).size();
+		return i;
 	}
 	
 }

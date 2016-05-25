@@ -2,6 +2,7 @@ package com.up;
 
 import javax.servlet.Filter;
 
+import org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
@@ -46,7 +47,7 @@ public class Application extends SpringBootServletInitializer {
 
     @Bean(name = "strutsFilter")
     public Filter strutsFilter() {
-        return new org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter();
+        return new StrutsPrepareAndExecuteFilter();
     }
     
     @Bean(name = "multipartFilter")

@@ -43,11 +43,16 @@
 			<s:submit value="Yes"/>
 				<sec:csrfInput />
 		</s:form>
+<p><a href="<s:url action='cancelfollow'/>">取消关注</a></p>
+
+		<p>关注：<s:property value="follownums"/></p>
+		<p>粉丝: <s:property value="fansnums"/></p>
+
 		<s:property value="followname"/>
 		
 		<h1>我关注的人：</h1>
-		<s:iterator value="follownames" id='names'>
-			<p><s:property value='names'/></p><button >取消关注</button><br/>
+		<s:iterator value="follownames" id='allnames'>
+			<p><s:property value='allnames'/></p><button >取消关注</button><br/>
 		</s:iterator>
 	</div>
 	<!-- /container -->
