@@ -15,5 +15,6 @@
 <s:property value="user.getNickname()"/>
 <s:property value="user.getGender()"/>
 <s:property value="weiboAmount"/>
+<p><a href="<s:url action='follow'/>">My Follow</a></p>
 </body>
 </html>
