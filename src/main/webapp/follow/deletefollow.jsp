@@ -37,26 +37,14 @@
 
 	<div class="container">
 <p><a href="<s:url action='index'/>">我的首页</a></p>
-		<s:form action="addfollow">
+		<s:form action="deletefollow">
 			<h3>add follow</h3>
 			<s:textfield name="username"/><s:property value="message"/>
-			<s:submit value="Yes"/>
+			<s:submit value="取消关注"/>
 				<sec:csrfInput />
 		</s:form>
-<p><a href="<s:url action='cancelfollow'/>">取消关注</a></p>
-
-		<p>关注：<s:property value="follownums"/></p>
-		<p>粉丝: <s:property value="myfansnums"/></p>
-
 		<s:property value="followname"/>
 		
-		<h1>我关注的人：</h1>
-		<s:iterator value="follownames" id='allnames'>
-			<p><s:property value='allnames'/></p><button >取消关注</button><br/>
-		</s:iterator>
-	</div>
-	<!-- /container -->
-
 
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 	<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>

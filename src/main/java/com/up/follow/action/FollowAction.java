@@ -27,7 +27,7 @@ public class FollowAction  extends ActionSupport{
 	private FollowService followservice;
 
 	private int follownums;
-	private int fansnums;
+	private int myfansnums;
 	@Autowired
 	private IFollowDao followDao;
 	
@@ -45,12 +45,12 @@ public class FollowAction  extends ActionSupport{
 		return this.follownums;
 	}
 
-	public void setFansnums(int fansnums){
-		this.fansnums = fansnums;
+	public void setMyfansnums(int fansnums){
+		this.myfansnums = fansnums;
 	}
 	
-	public int getFansnums(){
-		return this.follownums;
+	public int getMyfansnums(){
+		return this.myfansnums;
 	}
 	public void setFollownames(List<String> follownames){
 		this.follownames = follownames;
@@ -143,12 +143,14 @@ public class FollowAction  extends ActionSupport{
 		}
 		
 	setFollownums(followDao.getFollowNum(user_A.getId()));
-	setFansnums(followDao.getFansNum(user_A.getId()));
-	
+	setMyfansnums(followDao.getFansNum(user_A.getId()));
+	int i =0;
+	i++;
 	}
 	
 	public String ListFollow(){
 		setMessage();
+		show();
 		return SUCCESS;
 	}
 	
