@@ -14,7 +14,7 @@ import com.up.auth.action.RegisterAction;
  *
  */
 @Configuration
-public class BeanConfig {
+public class AuthBeanConfig {
 	@Bean
 	public HelloAction helloAction(){
 		return new HelloAction();

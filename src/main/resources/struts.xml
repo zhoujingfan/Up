@@ -50,5 +50,18 @@
 		<action name="index">
 			<result>/weibo/index.jsp</result>
 		</action>
+		
+		<action name="publishInput" class="publishAction" method="input">
+			<result name="success">/weibo/publishWeibo.jsp</result>
+		</action>
+		
+		<action name="publish" class="publishAction">
+			<result name="input">/weibo/publishWeibo.jsp</result>
+			<result name="success">/weibo/index.jsp</result>
+		</action>
+		
+		<action name="myWeibo" class="myWeiboAction">
+			<result name="success">/weibo/myWeibo.jsp</result>
+		</action>
 	</package>
 </struts>
