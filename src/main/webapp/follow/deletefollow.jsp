@@ -38,7 +38,7 @@
 	<div class="container">
 <p><a href="<s:url action='index'/>">我的首页</a></p>
 		<s:form action="deletefollow">
-			<h3>add follow</h3>
+			<h3>请输入取消关注的人的名字：</h3>
 			<s:textfield name="username"/><s:property value="message"/>
 			<s:submit value="取消关注"/>
 				<sec:csrfInput />
