@@ -3,6 +3,8 @@ package com.up.weibo.action;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.up.model.WeiboEntity;
@@ -32,6 +34,14 @@ public class SomebodysWeiboAction extends ActionSupport {
 	}
 	@Override
 	public String execute() throws Exception {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username;
+		if (principal instanceof UserDetails) {
+			username = ((UserDetails) principal).getUsername();
+		} else {
+			username = principal.toString();
+		}
+		weiboList = weiboService.getFollowUserWeibo(username);
 		return SUCCESS;
 	}
 	@Override

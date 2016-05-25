@@ -67,6 +67,9 @@
 		<action name="myWeibo" class="myWeiboAction">
 			<result name="success">/weibo/myWeibo.jsp</result>
 		</action>
+		<action name="myfollowuserWeibo" class="somebodysWeiboAction">
+			<result name="success">/weibo/myfollowuserweibo.jsp</result>
+		</action>
 	</package>
 	
 	<package name="weiboApi" extends="json-default" namespace="/api/weibo">
