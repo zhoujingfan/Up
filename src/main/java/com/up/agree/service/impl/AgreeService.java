@@ -26,7 +26,7 @@ public class AgreeService implements IAgreeService{
 		}
 	}
 	
-	public boolean cancleAgree(int weibo_id, int user_id) {
+	public boolean cancelAgree(int weibo_id, int user_id) {
 		AgreeEntity agree = new AgreeEntity();	
 		try{
 			agreeDao.cancel(weibo_id, user_id);
