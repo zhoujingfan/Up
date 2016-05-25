@@ -31,6 +31,10 @@
 		<action name="login">
 			<result>/auth/login.jsp</result>
 		</action>
+		
+		<action name="logout">
+			<result>/auth/login.jsp</result>
+		</action>
 
 		<action name="avatar" class="avatarAction">
 			<result name="success">/auth/avatar.jsp</result>
