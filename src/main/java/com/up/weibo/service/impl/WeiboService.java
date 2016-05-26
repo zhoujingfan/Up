@@ -52,6 +52,12 @@ public class WeiboService implements IWeiboService {
 	public List<WeiboEntity> getAllWeibo() {
 		return weiboDao.find("from WeiboEntity");
 	}
+	@Override
+	public List<WeiboEntity> getFollowUserWeibo(String username){
+		List<Object> param = new ArrayList<Object>();
+		param.add(username);
+		return weiboDao.find("from WeiboEntity where user_id in (select userEntityByFollowUserId from FollowEntity where userEntityByUserId.username = ?) order by time desc",param);
+	}
 
 	@Override
 	public List<WeiboEntity> getWeiboByNickname(String nickname) {
