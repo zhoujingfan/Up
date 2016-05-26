@@ -1,0 +1,65 @@
+body {
+    padding-top: 40px;
+    /*padding-bottom: 40px;*/
+    background-color: #eee;
+}
+
+.form-register {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+.form-register .form-register-heading,
+.form-register .checkbox {
+    margin-bottom: 10px;
+    color: black;
+    font-family: 微软雅黑;
+}
+.form-register .checkbox {
+    font-weight: normal;
+    color: black;
+    font-family: 微软雅黑;
+}
+.form-register .form-control {
+    position: relative;
+    height: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
+}
+.form-register .form-control:focus {
+    z-index: 2;
+}
+
+.form-register .form-control-first {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.form-register .form-control-middle {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.form-register .form-control-last {
+    margin-bottom: 20px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.form-register .form-control-single {
+    margin-bottom: 20px;
+}
+
+.form-register input[type="radio"] {
+    margin-bottom: 20px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.form-register p {
+    font-weight: 900;
+}

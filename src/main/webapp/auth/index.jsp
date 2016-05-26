@@ -36,7 +36,7 @@ pageEncoding="utf-8"%>
         </div>
         <form class="navbar-form navbar-left" role="search">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search">
+                <input type="text" class="form-control" placeholder="">
             </div>
             <button type="submit" class="btn btn-default">搜索</button>
         </form>
@@ -59,9 +59,9 @@ pageEncoding="utf-8"%>
             <div class="row" style="text-align: center">
                 <a><img class="img-thumbnail img-thumbnail" src="../images/cjj.jpg"
                         alt="Generic placeholder image" width="150" height="150"></a>
-                <h3><a>劳资是陈日天</a></h3>
-                <a href="<s:url action='follow'/>" class="col-lg-4"><div><p>关注<br>5</p></div></a>
-                <a href="<s:url action='follow'/>" class="col-lg-4"><div><p>粉丝<br>9999</p></div></a>
+                <h3><a><s:property value="username"/></a></h3>
+                <a href="<s:url action='follow'/>" class="col-lg-4"><div><p>关注<br><s:property value="follownums"/></p></div></a>
+                <a href="<s:url action='follow'/>" class="col-lg-4"><div><p>粉丝<br><s:property value="myfansnums"/></p></div></a>
                 <a href="" class="col-lg-4"><div><p>微博<br>9999</p></div></a>
 
             </div>
@@ -84,7 +84,7 @@ pageEncoding="utf-8"%>
         <div class="col-lg-7">
             <div class="up">
                 <div>
-                    <h3>欢迎周竞帆来给大家讲两句</h3>
+                    <h3>欢迎陈家家家家家家家家家俊来给大家讲两句</h3>
                         <input id="textarea" style="width: 100%"/>
                         <div class="row">
                             <input class="col-lg-10" type="file" name="pic" accept="image/*">
@@ -100,7 +100,7 @@ pageEncoding="utf-8"%>
                     </div>
                     <div class="col-lg-10 row">
                         <div class="up_userid">
-                            <a>劳资是陈日天</a>
+                            <a>陈家家家家家家家家家俊</a>
                         </div>
                         <div class="col-lg-1 up_time">
                             <a>20:61</a>
@@ -148,7 +148,7 @@ pageEncoding="utf-8"%>
                                 <a href=""><img id="review_image" src="../images/zjf.jpg" width="30px" height="30px" class="img-rounded"></a>
                             </div>
                             <div id="" class="col-lg-11">
-                                <p><a>老子是周艹地</a>： 我最牛逼，不服怼我</p>
+                                <p><a>周竞帆帆帆帆帆帆帆帆</a>： 你说得对</p>
                                 <div>
                                     <div class="reviews_time">
                                         <p>20:61</p>
@@ -168,7 +168,7 @@ pageEncoding="utf-8"%>
                                 <a href=""><img src="../cjj.jpg" width="30px" height="30px" class="img-rounded"></a>
                             </div>
                             <div class="col-lg-11">
-                                <p><a>劳资是陈日天</a>： 就怼你，怎么滴</p>
+                                <p><a>陈家家家家家家家家家俊</a>： 嗯啊</p>
                                 <div>
                                     <div class="reviews_time">
                                         <p>20:61</p>
