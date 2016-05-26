@@ -46,7 +46,7 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container middle">
     <c:url value="/auth/login" var="loginUrl" />
     <form action="${loginUrl}" method="post" class="form-signin row">
         <h2 class="form-signin-heading">登录</h2>
