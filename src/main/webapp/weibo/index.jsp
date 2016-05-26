@@ -10,5 +10,6 @@
 <body>
 	<a href="<s:url action='publishInput'/>">Publish</a>
 	<a href="<s:url action='myWeibo'/>">My Weibo</a>
+	<a href="<s:url action='myfollowuserWeibo'/>">My follow users' Weibo</a>
 </body>
 </html>
